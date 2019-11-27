@@ -5,12 +5,12 @@ When using log4net.logging.UdpAppender under netcoreapp3.0, logging messages are
 
 This results in UDP packets which cannot be properly interpreted:
 
-![alt text](Wireshark1.png)
+![Wireshark image](Wireshark1.png)
 
 
 A simple workaround is to derive from UpdAppender and conditionally modify the encoding in the constructor and then referencing the new appender in your log4netconfig.
 
-```
+```csharp
     public class UdpAppenderNetCore : UdpAppender
     {
         public UdpAppenderNetCore() : base()
@@ -28,7 +28,9 @@ A simple workaround is to derive from UpdAppender and conditionally modify the e
 
 With this change, the logging messages are sent in the proper format and can be interpreted by common logviewers (in my case using Log4View).
 
-![alt text](Wireshark2.png)
+![Wireshark image](Wireshark2.png)
 
+
+The code includes a sample implementation and console testapp for NET472 and NETCOREAPP3.0.
 
 Hope this helps!
